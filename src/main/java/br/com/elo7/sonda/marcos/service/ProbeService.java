@@ -29,7 +29,7 @@ public class ProbeService {
 
 	@Transactional
 	public ProbeResponseDTO landProbe(final ProbeDTO probeDTO) {
-		Planet planet = planetService.getById(probeDTO.getPlanetId())
+		Planet planet = planetService.getByIdEntity(probeDTO.getPlanetId())
 				.orElseThrow(() -> new NoResultException("Planet not found!"));
 		if(!isPossibleLandProbe(planet, probeDTO))
 			throw new IllegalArgumentException("Is not possible land probe!");

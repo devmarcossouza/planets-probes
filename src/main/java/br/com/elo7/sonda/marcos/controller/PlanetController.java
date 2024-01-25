@@ -1,6 +1,7 @@
 package br.com.elo7.sonda.marcos.controller;
 
 import br.com.elo7.sonda.marcos.dto.PlanetDTO;
+import br.com.elo7.sonda.marcos.dto.PlanetResponseDTO;
 import br.com.elo7.sonda.marcos.model.Planet;
 import br.com.elo7.sonda.marcos.service.PlanetService;
 import org.springframework.http.HttpStatus;
@@ -17,11 +18,11 @@ public class PlanetController {
         this.planetService = planetService;
     }
     @PostMapping
-    public ResponseEntity<Planet> create(@RequestBody @Validated PlanetDTO planet) {
+    public ResponseEntity<PlanetResponseDTO> create(@RequestBody @Validated PlanetDTO planet) {
         return ResponseEntity.ok(planetService.create(planet));
     }
     @GetMapping("{id}")
-    public ResponseEntity<Planet> getById(@PathVariable Long id) {
+    public ResponseEntity<PlanetResponseDTO> getById(@PathVariable Long id) {
         var planetOptional = planetService.getById(id);
         return planetOptional.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NO_CONTENT));
     }

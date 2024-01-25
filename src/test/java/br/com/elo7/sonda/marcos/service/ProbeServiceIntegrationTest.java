@@ -38,7 +38,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testLandProbe() {
         PlanetDTO planetDTO = new PlanetDTO(5, 5);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
 
         ProbeDTO probeDTO = new ProbeDTO(1, 1, Direction.N, planet.getId());
         ProbeResponseDTO probe = probeService.landProbe(probeDTO);
@@ -67,7 +67,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testLandProbeOutOfPlanetAreaX() {
         PlanetDTO planetDTO = new PlanetDTO(5, 5);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
         ProbeDTO probeDTO = new ProbeDTO(6, 5, Direction.N, planet.getId());
 
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -83,7 +83,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testLandProbeOutOfPlanetAreaY() {
         PlanetDTO planetDTO = new PlanetDTO(4, 4);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
         ProbeDTO probeDTO = new ProbeDTO(4, 5, Direction.N, planet.getId());
 
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -99,7 +99,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testLandProbeWithNegativeX() {
         PlanetDTO planetDTO = new PlanetDTO(2, 2);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
         ProbeDTO probeDTO = new ProbeDTO(-1, 2, Direction.N, planet.getId());
 
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -115,7 +115,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testLandProbeWithNegativeY() {
         PlanetDTO planetDTO = new PlanetDTO(2, 2);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
         ProbeDTO probeDTO = new ProbeDTO(2, -1, Direction.N, planet.getId());
 
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -131,7 +131,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testLandProbeWithoutPlanetSpaceAvailable() {
         PlanetDTO planetDTO = new PlanetDTO(1, 1);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
         ProbeDTO probeDTO = new ProbeDTO(1, 1, Direction.N, planet.getId());
         ProbeResponseDTO probe = probeService.landProbe(probeDTO);
         ProbeDTO probeDTO2 = new ProbeDTO(1, 1, Direction.N, planet.getId());
@@ -150,7 +150,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testLandProbeInTheSameSpaceHaveAnotherProbe() {
         PlanetDTO planetDTO = new PlanetDTO(2, 2);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
         ProbeDTO probeDTO = new ProbeDTO(1, 1, Direction.N, planet.getId());
         ProbeResponseDTO probe = probeService.landProbe(probeDTO);
         ProbeDTO probeDTO2 = new ProbeDTO(1, 1, Direction.N, planet.getId());
@@ -169,7 +169,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testMoveProbe() {
         PlanetDTO planetDTO = new PlanetDTO(5, 5);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
 
         ProbeDTO probeDTO = new ProbeDTO(1, 1, Direction.N, planet.getId());
         ProbeResponseDTO probe = probeService.landProbe(probeDTO);
@@ -188,7 +188,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testMoveProbeOutOfPlanet() {
         PlanetDTO planetDTO = new PlanetDTO(1, 1);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
 
         ProbeDTO probeDTO = new ProbeDTO(1, 1, Direction.N, planet.getId());
         ProbeResponseDTO probe = probeService.landProbe(probeDTO);
@@ -206,7 +206,7 @@ class ProbeServiceIntegrationTest {
     @Test
     public void testDeleteById() {
         PlanetDTO planetDTO = new PlanetDTO(1, 1);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
 
         ProbeDTO probeDTO = new ProbeDTO(1, 1, Direction.N, planet.getId());
         ProbeResponseDTO probe = probeService.landProbe(probeDTO);
@@ -217,7 +217,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testGetById() {
         PlanetDTO planetDTO = new PlanetDTO(1, 1);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
 
         ProbeDTO probeDTO = new ProbeDTO(1, 1, Direction.N, planet.getId());
         ProbeResponseDTO probe = probeService.landProbe(probeDTO);
@@ -235,7 +235,7 @@ class ProbeServiceIntegrationTest {
     @Test
     void testGetProbesByPlanetId() {
         PlanetDTO planetDTO = new PlanetDTO(2, 2);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
 
         ProbeDTO probeDTO1 = new ProbeDTO(1, 1, Direction.N, planet.getId());
         ProbeResponseDTO probe1 = probeService.landProbe(probeDTO1);

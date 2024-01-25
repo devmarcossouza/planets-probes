@@ -1,6 +1,7 @@
 package br.com.elo7.sonda.marcos.service;
 
 import br.com.elo7.sonda.marcos.dto.PlanetDTO;
+import br.com.elo7.sonda.marcos.dto.PlanetResponseDTO;
 import br.com.elo7.sonda.marcos.model.Planet;
 import br.com.elo7.sonda.marcos.persistence.PlanetRepository;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ class PlanetServiceIntegrationTest {
     @Test
     void createPlanet() {
         PlanetDTO planetDTO = new PlanetDTO(5, 5);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
 
         assertThat(planet.getId()).isNotNull();
         assertThat(planet.getHeight()).isEqualTo(5);
@@ -37,7 +38,7 @@ class PlanetServiceIntegrationTest {
         PlanetDTO planetDTO = new PlanetDTO(-1, 5);
 
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-            Planet planet = planetService.create(planetDTO);
+            PlanetResponseDTO planet = planetService.create(planetDTO);
         });
 
     }
@@ -46,16 +47,16 @@ class PlanetServiceIntegrationTest {
     void notCreatePlanetWithNegativeHeight() {
         PlanetDTO planetDTO = new PlanetDTO(5, -1);
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-            Planet planet = planetService.create(planetDTO);
+            PlanetResponseDTO planet = planetService.create(planetDTO);
         });
     }
 
     @Test
     void testGetById() {
         PlanetDTO planetDTO = new PlanetDTO(5, 5);
-        Planet planet = planetService.create(planetDTO);
+        PlanetResponseDTO planet = planetService.create(planetDTO);
 
-        Optional<Planet> optionalPlanet = planetService.getById(planet.getId());
+        Optional<PlanetResponseDTO> optionalPlanet = planetService.getById(planet.getId());
 
         assertThat(optionalPlanet).isPresent();
         assertThat(optionalPlanet.get().getId()).isEqualTo(planet.getId());
