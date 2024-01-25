@@ -1,0 +1,14 @@
+.metals
+*jar
+*class
+**/bin/*
+**/target/*
+*.iml
+*.ipr
+*.iws
+.idea/
+.classpath
+.project
+target/*
+
+.DS_Store
