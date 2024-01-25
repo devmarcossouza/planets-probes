@@ -42,9 +42,9 @@ public class ProbeController {
 		return probeOptional.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NO_CONTENT));
 	}
 
-	@GetMapping
+	@GetMapping("/probesByPlanet/{planetId}")
 	public ResponseEntity<Page<ProbeResponseDTO>> getProbesByPlanetId(
-			@PathVariable Long planetId,
+			@PathVariable("planetId") Long planetId,
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {
 		Pageable pageable = PageRequest.of(page, size);
