@@ -26,14 +26,22 @@ public class ProbeController {
 	@Operation(description = "Register the probe to the planet, in accordance with the specifications received")
 	@PostMapping
 	public ResponseEntity<ProbeResponseDTO> landProbe(@RequestBody ProbeDTO probeDTO) {
-		ProbeResponseDTO probeResponseDTO = probeService.landProbe(probeDTO);
-		return new ResponseEntity<>(probeResponseDTO, HttpStatus.CREATED);
+		try {
+			ProbeResponseDTO probeResponseDTO = probeService.landProbe(probeDTO);
+			return new ResponseEntity<>(probeResponseDTO, HttpStatus.CREATED);
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@Operation(description = "Moves the probe according to received commands")
 	@PatchMapping("/{id}")
 	public ResponseEntity<ProbeResponseDTO> moveProbe(@PathVariable Long id, @RequestBody MoveProbeDTO moveProbeDTO) {
-		return ResponseEntity.ok(probeService.moveProbe(id, moveProbeDTO));
+		try {
+			return ResponseEntity.ok(probeService.moveProbe(id, moveProbeDTO));
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@GetMapping("{id}")
